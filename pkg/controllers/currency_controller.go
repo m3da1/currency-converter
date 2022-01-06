@@ -8,7 +8,7 @@ import (
 
 // GET /convert-ccy?source={ccy1}&target={ccy2}
 //
-// Perform exchange rate conversion for source and target currencies
+// Perform exchange rate conversion from source to target currencies
 func GetExcahngeRate(resp http.ResponseWriter, req *http.Request) {
 	// permits only GET requests
 	switch req.Method {
