@@ -16,6 +16,7 @@ func GetExcahngeRate(resp http.ResponseWriter, req *http.Request) {
 		// retrieve currencies from query parameters
 		sourceCcy := req.URL.Query().Get("source")
 		targetCcy := req.URL.Query().Get("target")
+		// process currency conversion
 		retval, err := services.ProcessConversion(sourceCcy, targetCcy)
 		if err != nil {
 			resp.WriteHeader(http.StatusBadRequest)
