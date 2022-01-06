@@ -20,7 +20,6 @@ func SetupDatabase(test bool) error {
 	if err != nil {
 		return fmt.Errorf("error creating database: %v", err)
 	}
-	fmt.Println("Successfully configured sqlite database")
 	db.AutoMigrate(&ExchangeRate{})
 	DB = db
 	return nil
