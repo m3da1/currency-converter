@@ -1,6 +1,7 @@
 package services
 
 import (
+	"currency-converter/pkg/model"
 	"fmt"
 	"strings"
 )
@@ -21,17 +22,16 @@ func ProcessConversion(source, target string) (string, error) {
 	if validationErr := validateRequest(source, target); validationErr != nil {
 		return "", validationErr
 	}
-	// convert
-	switch strings.ToUpper(source) {
-	case nigeriaNaira:
-		return "1.0", nil
-	case ghanaCedis:
-		return "2.0", nil
-	case kenyanShilling:
-		return "3.0", nil
-	default:
-		return "", nil
+	// get exchange rate
+	return findExchangeRate(source, target)
+}
+
+func findExchangeRate(source, target string) (string, error) {
+	var exchange model.ExchangeRate
+	if err := model.DB.Where("source_ccy = ? and target_ccy = ?", source, target).Find(&exchange); err != nil {
+		return "", fmt.Errorf("couldn't find exchange rate; reason: %+v", err)
 	}
+	return fmt.Sprintf("%v", exchange.Rate), nil
 }
 
 func supportedCurrencies() []string {
