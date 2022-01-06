@@ -30,3 +30,11 @@ func GetExcahngeRate(resp http.ResponseWriter, req *http.Request) {
 		resp.Write([]byte("method not allowed"))
 	}
 }
+
+// GET /health
+//
+// Peform health information
+func HealthCheck(resp http.ResponseWriter, req *http.Request) {
+	resp.WriteHeader(http.StatusOK)
+	resp.Write([]byte("OK"))
+}

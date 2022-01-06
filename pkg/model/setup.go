@@ -11,8 +11,12 @@ import (
 var DB *gorm.DB
 
 // Establish connectivity to the database
-func SetupDatabase() error {
-	db, err := gorm.Open(sqlite.Open("data/test.db"), &gorm.Config{})
+func SetupDatabase(test bool) error {
+	path := "data/test.db"
+	if test {
+		path = "../data/test.db"
+	}
+	db, err := gorm.Open(sqlite.Open(path), &gorm.Config{})
 	if err != nil {
 		return fmt.Errorf("error creating database: %v", err)
 	}

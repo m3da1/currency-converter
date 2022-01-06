@@ -14,12 +14,13 @@ func main() {
 	domain := flag.String("domain", "localhost:8080", "host and port to run service on")
 	flag.Parse()
 	// configure database
-	if err := model.SetupDatabase(); err != nil {
+	if err := model.SetupDatabase(false); err != nil {
 		fmt.Printf("database error: %+v", err)
 		panic(err)
 	}
 	// configure request handler
 	http.HandleFunc("/convert-ccy", controllers.GetExcahngeRate)
+	http.HandleFunc("/health", controllers.HealthCheck)
 	fmt.Printf("Starting HTTP server @ %+v\n", *domain)
 	// listen for requests
 	if err := http.ListenAndServe(*domain, nil); err != nil {
