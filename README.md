@@ -88,8 +88,8 @@ After the project has been successfully built, you can run the compiled executab
 $ ./currency-converter --domain=0.0.0.0:9000
 Starting HTTP server @ 0.0.0.0:9000
 ```
-Note that this start the application on port 9000. The port can be modified in the command line argument
-If the argument is absent, the application default the port to 8080
+Note that this start the application on port 9000. The port can be modified in the command line argument.
+If the argument is absent, the application default the port to 8080 on localhost
 
 ```bash
 $ ./currency-converter                      
