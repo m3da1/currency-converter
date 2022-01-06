@@ -10,7 +10,7 @@ import (
 
 // Application entry point
 func main() {
-	// parse command line argument
+	// parse command line argument or default to localhost:8080
 	domain := flag.String("domain", "localhost:8080", "host and port to run service on")
 	flag.Parse()
 	// configure database

@@ -6,19 +6,24 @@ import (
 	"net/http"
 )
 
+// GET /convert-ccy?source={ccy1}&target={ccy2}
+//
+// Perform exchange rate conversion for source and target currencies
 func GetExcahngeRate(resp http.ResponseWriter, req *http.Request) {
+	// permits only GET requests
 	switch req.Method {
 	case "GET":
-		ccy1 := req.URL.Query().Get("source")
-		ccy2 := req.URL.Query().Get("target")
-		retval, err := services.ProcessConversion(ccy1, ccy2)
+		// retrieve currencies from query parameters
+		sourceCcy := req.URL.Query().Get("source")
+		targetCcy := req.URL.Query().Get("target")
+		retval, err := services.ProcessConversion(sourceCcy, targetCcy)
 		if err != nil {
 			resp.WriteHeader(http.StatusBadRequest)
 			resp.Write([]byte(fmt.Sprintf("%+v", err)))
 			return
 		}
 		resp.WriteHeader(http.StatusOK)
-		resp.Write([]byte(fmt.Sprintf("result: %+v", retval)))
+		resp.Write([]byte(fmt.Sprintf("rate: %+v", retval)))
 	default:
 		resp.WriteHeader(http.StatusMethodNotAllowed)
 		resp.Write([]byte("method not allowed"))

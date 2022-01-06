@@ -7,8 +7,10 @@ import (
 	"gorm.io/gorm"
 )
 
+// database object
 var DB *gorm.DB
 
+// Establish connectivity to the database
 func SetupDatabase() error {
 	db, err := gorm.Open(sqlite.Open("data/test.db"), &gorm.Config{})
 	if err != nil {
