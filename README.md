@@ -20,14 +20,15 @@ and Kenyan Shillings (KSH). Any other currency results in a failure with appropr
 ## Implementation
 
 The conversions between currencies are housed in a sqlite db and has been preloaded.
+
 ![](/db.png?raw=true "Sqlite conversion table")
+
 To convert between currencies, you provide the source(base) and target(quote) currency codes. 
 Application first santiates the input, verify the currencies and retrieves the rate from the database.
 
-
 ### Dependency
 
-Tried to limit the number of dependency for this service. Since we are using an sqlite database, I added the following
+I tried to limit the number of dependencies for this service. Since I used an sqlite database, I added the following
 
 * `sqlite driver` used for establish connection to the database and other functionalities
 * `gorm` used as ORM tool to safely abstract database operates through sanitization of parameters
@@ -95,6 +96,12 @@ $ ./currency-converter
 Starting HTTP server @ localhost:8080
 ```
 
+Alternatively, running the run.sh script also starts the application
+```bash
+$ ./run.sh                                  
+Starting HTTP server @ 0.0.0.0:9000
+```
+
 ## Testing
 
 You can test using command line utilities such as curl, httpie. or any other client or web browser.
@@ -127,3 +134,5 @@ invalid currency: USD
 
 ## Improvement
 
+Ideally, if this solution is dockerized, it eliminates the need to have golang installed on host system
+and provides a consistent environment for both testing and production.
